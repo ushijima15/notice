@@ -1,0 +1,27 @@
+
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+// $font-family-sans-serif: "Nunito", sans-serif;
+$font-family-sans-serif: "游ゴシック",YuGothic,"ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+$yiq-contrasted-threshold:  180 !default;
+
+$black:         #000000 !default;
+$primary:       rgb(31, 106, 168) !default;
+$secondary:     #6c757d !default;
+$success:       #28a745 !default;
+$info:          #17a2b8 !default;
+$warning:       #ffc107 !default;
+$danger:        #dc3545 !default;
+$beige:         #F5FFFA !default;
+$pink:          #FF5192 !default;
+$orange:        #fd7e14 !default;
+
+$theme-colors: (
+  "beige": $beige,
+  "pink": $pink,
+  "orange": $orange,
+);
