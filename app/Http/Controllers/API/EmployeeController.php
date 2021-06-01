@@ -42,12 +42,27 @@ class EmployeeController extends Controller
             ]);
         }
         DB::transaction(function () use ($request) {
+            $position = Employee::max('position');
+            $position++;
             // todo 
             // Userテーブル保存
-            
+            $employee = new Employee;
+            $employee->first_name = $request->employee['first_name'];
+            $employee->last_name = $request->employee['last_name'];
+            $employee->first_phonetic_name = $request->employee['first_phonetic_name'];
+            $employee->last_phonetic_name = $request->employee['last_phonetic_name'];
+            $employee->position = $position;
+            $user = new User;
+            $user->name =  $request->employee['user_name'];
+            // $user->email = $request->employee['email'] ?: '';
+            $user->password = bcrypt($request->employee['password']);
+            $user->is_admin = $request->employee['is_admin'];
+            $user->is_leader = $request->employee['is_leader'];
+            $user->save();
             // todo
             // Employeeテーブルに保存
-
+            $employee->user_id = $user->id;
+            $employee->save();
         });
 
         return response()->json([
@@ -86,17 +101,26 @@ class EmployeeController extends Controller
             ]);
         }
         DB::transaction(function () use ($request, $employee) {
-            $user = $employee->user;
+            $position = Employee::max('position');
+            $position++;
+            $employee = new Employee;
+            $employee->save();
+            $employee->first_name = $request->employee['first_name'];
+            $employee->last_name = $request->employee['last_name'];
+            $employee->first_phonetic_name = $request->employee['first_phonetic_name'];
+            $employee->last_phonetic_name = $request->employee['last_phonetic_name'];
+            $employee->position = $position;
+            $user = new User;
             $user->name =  $request->employee['user_name'];
             if (array_key_exists('password', $request->employee) && $request->employee['password']) {
                 $user->password = bcrypt($request->employee['password']);
             }
             $user->is_admin = $request->employee['is_admin'];
-            $user->save();
-            
+            $user->save(); 
             // todo
             // 従業員のデータを上書き保存
-            
+            $employee->user_id = $user->id;
+            $employee->save();
         });
 
         return response()->json([
