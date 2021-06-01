@@ -69,5 +69,21 @@
     "vue-router": "^3.4.9",
     "vuex": "^3.6.0",
     "vuex-persistedstate": "^2.7.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-console": "warn"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
   }
 }

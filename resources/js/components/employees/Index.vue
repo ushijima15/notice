@@ -21,20 +21,23 @@
             <table key="processes" class="table-custom">
               <thead>
                 <!-- todo -->
-                <!-- <tr>
-                  <tr>のコメントアウトを外し、中に一覧に表示させるものを書いてください。
-                </tr> -->
+                <tr>
+                  <td class="text-center align-middle">名前</td>
+                  <td class="text-center align-middle">フリガナ</td>
+                  <td class="text-center align-middle">ID</td>
+                  <td class="text-center align-middle">権限</td>
+                </tr>
               </thead>
-
               <tbody>
-                <!-- <tr
-                  v-for="(employee, index) in employees"
-                  :key="employee.id"
-                  class="clickable"
-                  @click="onShow(employee.id)"
-                >
-                <tr>のコメントアウトを外し、中に一覧に表示させるものを書いてください。
-                </tr> -->
+                <tr v-for="employee in employees" :key="employee.id" class="clickable" @click="onShow(employee.id)">
+                  <td class="text-center align-middle">{{ employee.full_name }}</td>
+                  <td class="text-center align-middle">{{ employee.full_phonetic_name }}</td>
+                  <td class="text-center align-middle">{{ employee.user_name }}</td>
+                  <td class="text-center align-middle">
+                    <div v-if="employee.is_admin">管理者</div>
+                    <div v-if="employee.is_leader">リーダー</div>
+                  </td>
+                </tr>
               </tbody>
               <loading :active.sync="isLoading"></loading>
             </table>

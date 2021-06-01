@@ -52,7 +52,6 @@
     </div>
     <div class="d-flex justify-content-center">
       <!-- 製作数量と作業時間を追加する -->
-      
     </div>
     <div class="d-flex justify-content-center mt-3 mb-4">
       <div v-if="own.is_admin">
@@ -101,7 +100,7 @@ export default {
       employees: [],
 
       state: {
-        is_start: false, 
+        is_start: false,
         is_finish: false,
       },
       default_state: {
@@ -151,7 +150,7 @@ export default {
     },
     finish_disabled() {
       if (this.state.is_finish) return true
-        return false
+      return false
     },
     state_all() {
       return {
@@ -183,9 +182,7 @@ export default {
     async getItems() {
       this.isLoading = true
       const api = axios.create()
-      const [res1] = await axios.all([
-        api.get('/api/employee/selector'),
-      ])
+      const [res1] = await axios.all([api.get('/api/employee/selector')])
       this.employees = res1.data
 
       const _this = this

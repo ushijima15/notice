@@ -14,12 +14,46 @@
             </div>
             <form>
               <!-- todo -->
-              <div class="form-group required-label row"></div>
-              <div class="form-group row"></div>
-              <div class="form-group row"></div>
-              <div class="form-group row"></div>
-              <div class="form-group required-label row"></div>
-              
+              <div class="form-group required-label row">
+                <label for="last_name" class="col-md-4 col-form-label text-md-right">姓</label>
+                <div class="col-md-6">
+                  <input id="last_name" v-model="employee.last_name" type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="first_name" class="col-md-4 col-form-label text-md-right">名</label>
+                <div class="col-md-6">
+                  <input id="first_name" v-model="employee.first_name" type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="last_phonetic_name" class="col-md-4 col-form-label text-md-right">カナ性</label>
+                <div class="col-md-6">
+                  <input
+                    id="last_phonetic_name"
+                    v-model="employee.last_phonetic_name"
+                    type="text"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="first_phonetic_name" class="col-md-4 col-form-label text-md-right">カナ名</label>
+                <div class="col-md-6">
+                  <input
+                    id="first_phonetic_name"
+                    v-model="employee.first_phonetic_name"
+                    type="text"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="form-group required-label row">
+                <label for="user_id" class="col-md-4 col-form-label text-md-right">ユーザーID</label>
+                <div class="col-md-6">
+                  <input id="user_id" v-model="employee.user_id" type="text" class="form-control" />
+                </div>
+              </div>
               <div v-if="mode === 'create'" class="form-group required-label row">
                 <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
                 <div class="col-md-6">
@@ -36,6 +70,7 @@
               <div class="form-group row">
                 <div class="col-md-4 text-md-right">
                   <label for="is_admin" class="col-form-label">権限の選択</label>
+                  <input id="is_admin" v-model="employee.is_admin" type="checkbox" size="10" class="form-control" />
                 </div>
                 <div class="col-md-8 pt-1">
                   <div class="custom-control custom-checkbox mt-1 custom-control-inline"></div>
@@ -85,8 +120,10 @@ export default {
     return {
       employee: {
         id: '',
-        
-        
+        last_name: '',
+        first_name: '',
+        last_phonetic_name: '',
+        first_phonetic_name: '',
         is_admin: false,
       },
 

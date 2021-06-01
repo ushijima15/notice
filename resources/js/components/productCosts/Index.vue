@@ -47,7 +47,6 @@
             <!-- todo -->
             <th class="text-center bg-primary text-white"></th>
             <th class="text-center bg-primary text-white">作業日</th>
-            
           </tr>
         </thead>
         <tbody>
@@ -65,7 +64,6 @@
             </td>
             <!-- todo -->
             <td data-label="作成日" class="text-sm-center">{{ product_cost.worked_on }}</td>
-            
           </tr>
         </tbody>
       </table>
@@ -160,7 +158,7 @@ export default {
       const { data } = await axios.get('/api/productcost', {
         params: {
           // todo
-          
+
           offset: this.offset,
           limit: this.itemsPerPage,
           sort: this.sort,
