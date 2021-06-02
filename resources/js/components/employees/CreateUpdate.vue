@@ -49,9 +49,9 @@
                 </div>
               </div>
               <div class="form-group required-label row">
-                <label for="user_id" class="col-md-4 col-form-label text-md-right">ユーザーID</label>
+                <label for="user_name" class="col-md-4 col-form-label text-md-right">ユーザーID</label>
                 <div class="col-md-6">
-                  <input id="user_id" v-model="employee.user_id" type="text" class="form-control" />
+                  <input id="user_name" v-model="employee.user_name" type="text" class="form-control" />
                 </div>
               </div>
               <div v-if="mode === 'create'" class="form-group required-label row">
@@ -70,10 +70,12 @@
               <div class="form-group row">
                 <div class="col-md-4 text-md-right">
                   <label for="is_admin" class="col-form-label">権限の選択</label>
-                  <input id="is_admin" v-model="employee.is_admin" type="checkbox" size="10" class="form-control" />
                 </div>
                 <div class="col-md-8 pt-1">
-                  <div class="custom-control custom-checkbox mt-1 custom-control-inline"></div>
+                  <div class="custom-control custom-checkbox mt-1 custom-control-inline">
+                    <input id="is_admin" v-model="employee.is_admin" type="checkbox" class="custom-control-input" />
+                    <label class="custom-control-label" for="is_admin">管理者</label>
+                  </div>
                 </div>
               </div>
 
@@ -120,10 +122,12 @@ export default {
     return {
       employee: {
         id: '',
-        last_name: '',
         first_name: '',
+        last_name: '',
         last_phonetic_name: '',
         first_phonetic_name: '',
+        user_name: '',
+        password: '',
         is_admin: false,
       },
 
@@ -176,6 +180,30 @@ export default {
       // todo
       // 必須ラベルがついているものはアラートを表示させる
       // 「パスワードは4文字以上で入力してください」とアラート表示
+      if (!this.employee.last_name) {
+        alert('姓を入力してください。')
+        this.errorMessage = '姓を入力してください。'
+        this.invalid = true
+        return
+      }
+      if (!this.employee.user_name) {
+        alert('ユーザーIDを入力してください。')
+        this.errorMessage = 'ユーザーIDを入力してください'
+        this.invalid = true
+        return
+      }
+      if (this.mode === 'this.mode' && !this.employee.spasword) {
+        alert('パスワードを入力してください。')
+        this.errorMessage = 'パスワードを入力してください。'
+        this.invalid = true
+        return
+      }
+      if (this.employee.password && this.employee.length < 4) {
+        alert('パスワードは４文字以上で入力してください。')
+        this.errorMessage = 'パスワードは４文字以上で入力してください。'
+        this.invalid = true
+        return
+      }
 
       const _this = this
       if (this.mode === 'create') {

@@ -4,32 +4,30 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-body">
-            <div class="d-flex justify-content-start mb-3">
+            <div class="d-flex justify-content-start mt-1 mb-2">
               <div class="mr-auto">
                 <span class="span-header">従業員一覧</span>
               </div>
               <div class="align-self-center mr-3">
-                <button type="button" class="btn btn-primary" @click="onCreate">
-                  <i class="fas fa-plus"></i> 新規追加
-                </button>
+                <button type="button" class="btn btn-primary" @click="onCreate">新規追加</button>
               </div>
               <div class="align-self-center">
                 <button type="button" class="btn btn-dark" @click="onBack">戻る</button>
               </div>
             </div>
 
-            <table key="processes" class="table-custom">
+            <table key="processes" class="table-custom table-sm">
               <thead>
                 <!-- todo -->
                 <tr>
-                  <td class="text-center align-middle">名前</td>
-                  <td class="text-center align-middle">フリガナ</td>
-                  <td class="text-center align-middle">ID</td>
-                  <td class="text-center align-middle">権限</td>
+                  <td class="text-center bg-primary text-white">名前</td>
+                  <td class="text-center bg-primary text-white">フリガナ</td>
+                  <td class="text-center bg-primary text-white">ID</td>
+                  <td class="text-center bg-primary text-white">権限</td>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="employee in employees" :key="employee.id" class="clickable" @click="onShow(employee.id)">
+                <tr v-for="employee in employees" :key="employee.id" class="bg-white" @click="onShow(employee.id)">
                   <td class="text-center align-middle">{{ employee.full_name }}</td>
                   <td class="text-center align-middle">{{ employee.full_phonetic_name }}</td>
                   <td class="text-center align-middle">{{ employee.user_name }}</td>

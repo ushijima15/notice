@@ -19,6 +19,7 @@ class EmployeeForList extends JsonResource
             // todo
             'full_name' => $this->full_name,
             'full_phonetic_name' => $this->full_phonetic_name,
+            'user_name' => isset($this->user) ? $this->user->name : null,
             'is_admin' => isset($this->user) ? $this->user->is_admin : false,
             'is_leader' => isset($this->user) ? $this->user->is_leader : false,
         ];
