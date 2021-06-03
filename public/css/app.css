@@ -11469,6 +11469,12 @@ a.text-orange:focus {
   color: #6c757d;
 }
 
+.span-header2 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #000000;
+}
+
 .clickable {
   cursor: pointer;
 }

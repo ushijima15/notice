@@ -4,10 +4,8 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-body">
-            <div class="d-flex justify-content-start mt-1 mb-2">
-              <div class="mr-auto">
-                <span class="span-header">従業員一覧</span>
-              </div>
+            <div class="d-flex justify-content-start mb-3">
+              <h3 class="mr-auto">作業員一覧</h3>
               <div class="align-self-center mr-3">
                 <button type="button" class="btn btn-primary" @click="onCreate">新規追加</button>
               </div>
@@ -16,7 +14,7 @@
               </div>
             </div>
 
-            <table key="processes" class="table-custom table-sm">
+            <table key="processes" class="table table-striped">
               <thead>
                 <!-- todo -->
                 <tr>
@@ -27,7 +25,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="employee in employees" :key="employee.id" class="bg-white" @click="onShow(employee.id)">
+                <tr v-for="employee in employees" :key="employee.id" @click="onShow(employee.id)">
                   <td class="text-center align-middle">{{ employee.full_name }}</td>
                   <td class="text-center align-middle">{{ employee.full_phonetic_name }}</td>
                   <td class="text-center align-middle">{{ employee.user_name }}</td>

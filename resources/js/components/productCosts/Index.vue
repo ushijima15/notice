@@ -47,6 +47,13 @@
             <!-- todo -->
             <th class="text-center bg-primary text-white"></th>
             <th class="text-center bg-primary text-white">作業日</th>
+            <th class="text-center bg-primary text-white">作業者</th>
+            <th class="text-center bg-primary text-white">ラインNo.</th>
+            <th class="text-center bg-primary text-white">部品番号</th>
+            <th class="text-center bg-primary text-white">納入指示日</th>
+            <th class="text-center bg-primary text-white">指示数</th>
+            <th class="text-center bg-primary text-white">稼働時間</th>
+            <th class="text-center bg-primary text-white">状態</th>
           </tr>
         </thead>
         <tbody>

@@ -6,7 +6,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-start mb-3">
               <div class="mr-auto">
-                <span class="span-header">{{ title }}</span>
+                <span class="span-header2">{{ title }}</span>
               </div>
               <div class="align-self-center">
                 <button type="button" class="btn btn-dark" @click="onBack">戻る</button>
