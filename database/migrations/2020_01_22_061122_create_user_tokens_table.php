@@ -11,6 +11,11 @@ class CreateUserTokensTable extends Migration
      *
      * @return void
      */
+    public function likes() { //
+        return $this->hasMany(\App\Like::class, 'parent_id', 'id')
+            ->where('model', self::class);
+
+    }
     public function up()
     {
         Schema::create('user_tokens', function (Blueprint $table) {

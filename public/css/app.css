@@ -11569,3 +11569,11 @@ a.text-orange:focus {
   opacity: 0;
 }
 
+.good {
+  color: red;
+}
+
+.good2 {
+  color: none;
+}
+

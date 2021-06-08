@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div class="container">
     <div class="row justify-content-center">
@@ -13,7 +14,6 @@
                 <button type="button" class="btn btn-dark" @click="onBack">戻る</button>
               </div>
             </div>
-
             <table key="processes" class="table table-striped">
               <thead>
                 <!-- todo -->
@@ -41,6 +41,23 @@
         </div>
       </div>
     </div>
+    <div>
+      <p>いいねボタン実装</p>
+      <button v-if="isActive === false" class="good" @click="toggle_switch()">&#9825;</button>
+      <button v-if="isActive === true" class="good" @click="toggle_switch()">&#9829;</button>
+      <button v-if="isActive2 === false" class="good2" @click="toggle_switch2()">&#x1f44d;</button>
+      <button v-if="isActive2 === true" @click="toggle_switch2()">&#x1f44d;</button>
+      <!--<button v-if="status === false" type="button" class="btn btn-outline-warning" @click.prevent="like_check">
+        &#9825;
+      </button>
+      <a v-if="status == false" href="#">{{ count }}</a>
+      <button v-else type="button" class="btn btn-warning" @click.prevent="like_check">
+        &#9829;
+      </button>
+      <a v-if="status === true" href="#">
+        {{ count }}
+      </a>-->
+    </div>
   </div>
 </template>
 
@@ -50,11 +67,14 @@ export default {
   components: {
     // Loading
   },
-  props: [],
   data() {
     return {
       employees: [],
+      isActive: false,
+      isActive2: false,
       isLoading: false,
+      status: false,
+      count: 0,
     }
   },
   computed: {
@@ -63,11 +83,20 @@ export default {
   watch: {
     //
   },
+  created() {
+    this.first_check()
+  },
   mounted() {
     // this.inspected_on = new moment().format('YYYY-MM-DD')
     this.getItems()
   },
   methods: {
+    toggle_switch: function() {
+      this.isActive = !this.isActive
+    },
+    toggle_switch2: function() {
+      this.isActive2 = !this.isActive2
+    },
     getItems: function() {
       this.isLoading = true
       const api = axios.create()

@@ -55,5 +55,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('employee/full_name', 'API\EmployeeController@fullname');
 
     // csv取込
-    
+    //Likes
+    Route::get('/like', 'LikeController@index');//ブラウザでアクセスする。
+    Route::get('/ajax/like/user_list', 'LikeController@user_list');//ユーザー情報を取得
+    Route::post('/ajax/like', 'LikeController@like');//いいねデータを追加
 });
