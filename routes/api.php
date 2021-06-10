@@ -64,9 +64,13 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('test', 'API\TestController@store');
     Route::get('test/{test}', 'API\TestController@show');
     Route::put('test/{test}', 'API\TestController@update');
+    Route::delete('test/{test}', 'API\TestController@destroy');
+    Route::get('test/selector', 'API\TestController@selector');
     //Tweetのルーティング設定
     Route::get('tweet', 'API\TweetController@index');
     Route::post('tweet', 'API\TweetController@store');
     Route::get('tweet/{tweet}', 'API\TweetController@show');
     Route::put('tweet/{tweet}', 'API\TweetController@update');
+    Route::delete('tweet/{tweet}', 'API\TweetController@destroy');
+    Route::get('tweet/selector', 'API\TweetController@selector');
 });

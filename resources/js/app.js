@@ -99,6 +99,12 @@ const router = new VueRouter({
       component: require('./components/tests/CreateUpdate.vue').default,
       props: true,
     },
+    {
+      name: 'test.show',
+      path: '/test/show/:testId',
+      component: require('./components/tests/CreateUpdate.vue').default,
+      props: true,
+    },
     // 従業員
     { name: 'employee', path: '/employee', component: require('./components/employees/Index.vue').default },
     {

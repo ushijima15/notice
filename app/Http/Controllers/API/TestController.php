@@ -3,13 +3,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\TestForList as TestForListResource;
 use App\Http\Resources\TestForShow as TestForShowResource;
+use App\Http\Resources\TestSelector as TestSelectorResource;
 use App\Http\Resources\TestForSelector as TestForSelectorResource;
 use App\Test;
-use App\User;
+use App\Tweet;
 class TestController extends Controller
 {
     /**
@@ -62,22 +62,21 @@ class TestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $count = Test::where([
-            ['id', '<>', $test->id],
-            ['code', $request->test['code']]
-        ])->count();
-        DB::transaction(function () use ($request, $test) {
-            $test->text = $request->test['text'];
-            $test->id = $request->test['id'];
-            $test->tweet_id = $request->test['tweet_id'];
-            $test->save();
-        });
-
-        return response()->json([
-            'result' => true,
-        ]);
+        // DB::transaction(function () use ($request, $test) {
+        //     $test = new Test;
+        //     $test->id = $request->test['id'];
+        //     $test->text = $request->test['text'];
+        //     $test->save();
+        //     $test->tweet_id = $request->test['tweet_id'];
+        //     $test->save();
+        // });
+        $test = Test::find($request->id);
+        $test->text = $request->text;
+        $test->tweet_id = $request->tweet_id;
+        $test->save();
+        return redirect('/');
     }
 
     /**
@@ -86,7 +85,7 @@ class TestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Test $test)
     {
         DB::transaction(function () use ($test) {
             $test->delete();

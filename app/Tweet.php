@@ -8,6 +8,6 @@ class Tweet extends Model
     protected $primaryKey = 'id';
     public function tests()
     {
-        return $this->hasMany(Test::class);
+        return $this->hasMany('App\Test');
     }
 }

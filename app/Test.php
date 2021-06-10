@@ -8,6 +8,6 @@ class Test extends Model
     protected $primaryKey = 'id';
     public function tweet()
     {
-        return $this->belongsTo(Tweet::class);
+        return $this->belongsTo('App\Tweet');
     }
 }

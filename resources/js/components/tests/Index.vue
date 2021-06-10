@@ -2,10 +2,39 @@
 <template>
   <div class="container">
     <div>
-      <button type="button" class="btn btn-primary" @click="onNext">戻る</button>
+      <button type="button" class="btn btn-primary" @click="onBack">戻る</button>
+      <hr />
     </div>
     <div>
       <p>投稿内容</p>
+      <div
+        v-for="tweet in tweets"
+        :key="tweet.id"
+        class="clickable"
+        style="padding: 10px; margin-bottom: 10px; border: 5px double #333333; border-radius: 10px; background-color: #ffff99;"
+      >
+        <p>投稿者ID:{{ tweet.id }}</p>
+        <p>本文{{ tweet.text }}</p>
+        <button type="button" class="btn btn-primary text-center align-middle" @click="onNext(tweet.id)">
+          返信する
+        </button>
+        <hr />
+        <div v-for="test in tests" :key="test.id">
+          <div v-if="tweet.id === test.tweet_id">
+            <p>投稿者ID:{{ test.id }}</p>
+            <p>返信者:</p>
+            <p>本文:{{ test.text }}</p>
+            <button type="button" class="btn btn-primary text-center align-middle" @click="onShow(test.id)">
+              編集
+            </button>
+            <button type="button" class="btn btn-primary text-center align-middle" @click="onDelete(test.id)">
+              削除
+            </button>
+            <hr />
+          </div>
+        </div>
+      </div>
+      <!--
       <table key="processes" class="table table-striped">
         <thead>
           <tr>
@@ -44,6 +73,7 @@
         </tbody>
         <loading :active.sync="isLoading"></loading>
       </table>
+      -->
     </div>
   </div>
 </template>
@@ -54,7 +84,7 @@ export default {
   components: {
     // Loading
   },
-  props: ['tweetId'],
+  props: ['tweetId', 'testId'],
   data() {
     return {
       tests: [],
@@ -96,8 +126,31 @@ export default {
       this.message = tweet_id
       this.$router.push({ name: 'test.create', params: { tweetId: this.message } })
     },
+    onShow: function(test_id) {
+      this.message = test_id
+      this.$router.push({ name: 'test.show', params: { testId: this.message } })
+    },
     onBack() {
       this.$router.go(-1)
+    },
+    onDelete: function(test_id) {
+      this.message = test_id
+      if (!confirm('削除してもよろしいですか？')) {
+        return
+      }
+      location.reload()
+      const _this = this
+      axios
+        .delete('/api/test/' + this.message)
+        .then(function(resp) {
+          alert('削除しました。')
+        })
+        .catch(function(resp) {
+          console.log(resp)
+        })
+        .finally(function() {
+          //
+        })
     },
     toggle_switch: function() {
       this.isActive = !this.isActive
