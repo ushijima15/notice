@@ -11571,9 +11571,30 @@ a.text-orange:focus {
 
 .good {
   color: red;
+  display: inline-block;
 }
 
 .good2 {
-  color: none;
+  background-color: #ffae00;
+}
+
+.reply {
+  border: 1px solid;
+  background-color: #fff;
+  width: 270px;
+  height: 210px;
+  padding: 20px;
+  border-spacing: 10px;
+}
+
+.reply2 {
+  width: 200px;
+  height: 130px;
+  padding: 10px;
+}
+
+.reply3 {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 

@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
-    protected $fillable = [
-        'employees_id','user_id','like'
-   ];
+    protected $fillable = ['test_id'];
+    public function test()
+    {
+    return $this->belongsTo(Test::class);
+    }
 }

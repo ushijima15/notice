@@ -14,6 +14,7 @@
             dusk="setting"
             >設定管理</router-link
           >
+          <router-link :to="{ name: 'test' }" class="btn btn-primary btn-menu mr-3 mb-3">テスト</router-link>
         </div>
       </div>
     </div>

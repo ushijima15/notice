@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
-    public function likes() { // 👈 追加
+    public function likes() { //
 
         return $this->hasMany(\App\Like::class, 'parent_id', 'id')
             ->where('model', self::class);

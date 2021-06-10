@@ -45,8 +45,8 @@
       <p>いいねボタン実装</p>
       <button v-if="isActive === false" class="good" @click="toggle_switch()">&#9825;</button>
       <button v-if="isActive === true" class="good" @click="toggle_switch()">&#9829;</button>
-      <button v-if="isActive2 === false" class="good2" @click="toggle_switch2()">&#x1f44d;</button>
-      <button v-if="isActive2 === true" @click="toggle_switch2()">&#x1f44d;</button>
+      <button v-if="isActive2 === true" class="good2" @click="toggle_switch2()">&#x1f44d;</button>
+      <button v-if="isActive2 === false" @click="toggle_switch2()">&#x1f44d;</button>
       <!--<button v-if="status === false" type="button" class="btn btn-outline-warning" @click.prevent="like_check">
         &#9825;
       </button>

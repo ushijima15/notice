@@ -59,4 +59,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/like', 'LikeController@index');//ブラウザでアクセスする。
     Route::get('/ajax/like/user_list', 'LikeController@user_list');//ユーザー情報を取得
     Route::post('/ajax/like', 'LikeController@like');//いいねデータを追加
+    //Testのルーティング設定
+    Route::get('test', 'API\TestController@index');
+    Route::post('test', 'API\TestController@store');
+    Route::get('test/{test}', 'API\TestController@show');
+    Route::put('test/{test}', 'API\TestController@update');
+    //Tweetのルーティング設定
+    Route::get('tweet', 'API\TweetController@index');
+    Route::post('tweet', 'API\TweetController@store');
+    Route::get('tweet/{tweet}', 'API\TweetController@show');
+    Route::put('tweet/{tweet}', 'API\TweetController@update');
 });

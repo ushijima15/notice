@@ -91,7 +91,14 @@ const router = new VueRouter({
     },
     // 設定
     { name: 'setting', path: '/setting', component: require('./components/settings/Index.vue').default },
-
+    // テスト設定
+    { name: 'test', path: '/test', component: require('./components/tests/Index.vue').default, props: true },
+    {
+      name: 'test.create',
+      path: '/test/create',
+      component: require('./components/tests/CreateUpdate.vue').default,
+      props: true,
+    },
     // 従業員
     { name: 'employee', path: '/employee', component: require('./components/employees/Index.vue').default },
     {
