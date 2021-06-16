@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Like;
 class LikesTableSeeder extends Seeder
 {
     /**
@@ -11,7 +11,6 @@ class LikesTableSeeder extends Seeder
      */
     public function run()
     {
-        Schema::create('likes', function (Blueprint $table) {
-        });
+        //$model = new Like;$model->user_id = 1;$model->tweet_id=2;$model->save();
     }
 }

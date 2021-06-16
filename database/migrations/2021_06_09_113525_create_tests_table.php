@@ -17,6 +17,7 @@ class CreateTestsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tweet_id')->nullable()->comment('投稿ID');
             $table->string('text')->comment('返信内容');
+            $table->unsignedBigInteger('user_id')->nullable()->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -4,7 +4,14 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\LikeForList as LikeForListResource;
+use App\Http\Resources\LikeForShow as LikeForShowResource;
+use App\Http\Resources\LikeForSelector as LikeForSelectorResource;
+use App\Like;
+use App\Tweet;
+use App\User;
 class LikeController extends Controller
 {
     /**
@@ -14,7 +21,11 @@ class LikeController extends Controller
      */
     public function index()
     {
-        //
+        //$post = Post::find($id);
+        //$post->users()->attach(Auth::id());
+        // $post = Employee::find($id);
+        // $post->users()->attach(Auth::id());
+        return 123;
     }
 
     /**
@@ -23,9 +34,18 @@ class LikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        // $post = Employee::find($id);
+        // $post->users()->attach(Auth::id());
+        $post->user_id = Auth::id();
+        $like = new Test;
+        $like->id = $request->like['id'];
+        $like->tweet_id = $request->like['tweet_id'];
+        $like->user_id = Auth::id();
+        return response()->json([
+            'result' => true,
+        ]);
     }
 
     /**
@@ -34,11 +54,15 @@ class LikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Like $like)
     {
-        //
+        //$post = Post::find($id);
+        //$post->users()->attach(Auth::id());
+        // $post = Employee::find($id);
+        // $post->users()->attach(Auth::id());
+        $post->user_id = Auth::id();
+        return new LikeForShowResource($like);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -46,9 +70,8 @@ class LikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Like $like)
     {
-        //
     }
 
     /**
@@ -57,8 +80,22 @@ class LikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Like $like)
     {
-        //
+        //$post = Post::find($id);
+        //$post->users()->attach(Auth::id());
+        // $post = Employee::find($id);
+        // $post->users()->attach(Auth::id());
+        $like = Like::where('tweet_id', $id)->where('tweet_id', Auth::id())->first();
+        $like->delete();
+        return response()->json([
+            'result' => true,
+        ]);
+    }
+    public function userid(){
+        return Auth::id();
+    }
+    public function username(){
+        return Auth::user()->name;
     }
 }

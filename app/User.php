@@ -58,4 +58,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Employee');
     }
+    public function tweets()
+    {
+        return $this->hasMany('App\Tweets');
+    }
+    public function like()
+    {
+        return $this->hasMany('App\Like','user_id');
+    }
 }

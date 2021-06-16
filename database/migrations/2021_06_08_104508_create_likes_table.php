@@ -13,6 +13,12 @@ class CreateLikesTable extends Migration
      */
     public function up()
     {
+        Schema::create('likes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('tweet_id')->unsigned();
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->timestamps();
+        });
     }
 
     /**

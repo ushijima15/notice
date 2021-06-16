@@ -7,14 +7,12 @@
       <button type="button" class="btn btn-primary" @click="onBack">戻る</button>
     </div>
     <br />
-    <div v-for="tweet in tweets" :key="tweet.id" class="clickable">
-      <div
-        v-if="tweetId === tweet.id || test.tweet_id === tweet.id"
-        style="padding: 10px; margin-bottom: 10px; border: 5px double #333333; border-radius: 10px; background-color: #ffff99;"
-      >
-        <p>投稿者ID:{{ tweet.id }}</p>
-        <p>本文{{ tweet.text }}</p>
-      </div>
+    <div
+      style="padding: 10px; margin-bottom: 10px; border: 5px double #333333; border-radius: 10px; background-color: #ffff99;"
+    >
+      <p>投稿者:{{ tweet.user_name }}</p>
+      <p>【投稿内容】</p>
+      <p>{{ tweet.text }}</p>
     </div>
     <div class="reply">
       <input v-model="test.text" class="reply2" type="text" />
@@ -39,12 +37,20 @@ export default {
         id: null,
         tweet_id: null,
         text: '',
+        user_id: null,
       },
-      tweets: [],
+      tweet: {
+        id: null,
+        text: '',
+        user_id: null,
+        user_name: '',
+        own_like: null,
+      },
       invalid: false,
       errorMessage: '',
       isLoading: false,
       fullPage: false,
+      visual: false,
     }
   },
   computed: {
@@ -66,9 +72,9 @@ export default {
       this.isLoading = true
       const api = axios.create()
       const api2 = axios.create()
-      axios.all([api2.get('/api/tweet')]).then(
+      axios.all([api2.get('/api/tweet/' + this.tweetId)]).then(
         axios.spread((res5, res6, res7, res8) => {
-          this.tweets = res5.data
+          this.tweet = res5.data
           this.isLoading = false
         }),
       )
@@ -111,7 +117,6 @@ export default {
           })
         this.isLoading = false
       } else {
-        alert('確認')
         axios
           .put('/api/test/' + this.test.id, {
             test: this.test,
@@ -121,7 +126,6 @@ export default {
               alert('更新しました。')
               _this.$router.go(-1)
             } else {
-              alert('確認2')
               _this.errorMessage = resp.data.errorMessage
               _this.invalid = true
             }

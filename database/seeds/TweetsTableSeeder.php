@@ -12,8 +12,8 @@ class TweetsTableSeeder extends Seeder
      */
     public function run()
     {
-        $model = new Tweet;$model->text="おはようございます。";$model->save();
-        $model = new Tweet;$model->text="こんにちは。";$model->save();
-        $model = new Tweet;$model->text="こんばんは！";$model->save();
+        $model = new Tweet;$model->user_id = 5;$model->text="おはようございます。";$model->save();
+        $model = new Tweet;$model->user_id = 3;$model->text="こんにちは。";$model->save();
+        $model = new Tweet;$model->user_id = 2;$model->text="こんばんは！";$model->save();
     }
 }

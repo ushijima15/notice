@@ -11,6 +11,7 @@ use App\Http\Resources\TweetForShow as TweetForShowResource;
 use App\Http\Resources\TweetForSelector as TweetForSelectorResource;
 use App\Tweet;
 use App\User;
+use App\Like;
 class TweetController extends Controller
 {
     /**
@@ -64,10 +65,6 @@ class TweetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $count = Tweet::where([
-            ['id', '<>', $tweet->id],
-            ['code', $request->tweet['code']]
-        ])->count();
         DB::transaction(function () use ($request, $tweet) {
             $tweet->text = $request->tweet['text'];
             $tweet->id = $request->tweet['id'];
@@ -91,6 +88,36 @@ class TweetController extends Controller
             $tweet->delete();
         });
 
+        return response()->json([
+            'result' => true,
+        ]);
+    }
+    public function addgood(Request $request,$id)
+    {
+        Like::create([
+            'tweet_id' => $id,
+            'user_id' => Auth::id(),
+        ]);
+        // DB::transaction(function () use ($request) {
+        //     $like = new Like;
+        //     $like->tweet_id = $request->tweet['id'];
+        //     $like->user_id = $request->Auth::id();
+        //     $like->save();
+        // });
+        //session()->flash('success', 'You Liked the Reply.');
+        //return redirect()->back();
+        return response()->json([
+            'result' => true,
+        ]);
+    }
+    public function deletegood(Request $request,$id)
+    {
+       $like = Like::where('tweet_id', $id)->where('user_id', Auth::id())->first();
+       $like->delete();
+   
+       //session()->flash('success', 'You Unliked the Reply.');
+   
+       //return redirect()->back();
         return response()->json([
             'result' => true,
         ]);

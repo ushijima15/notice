@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\TestForList as TestForListResource;
 use App\Http\Resources\TestForShow as TestForShowResource;
 use App\Http\Resources\TestSelector as TestSelectorResource;
@@ -36,6 +37,7 @@ class TestController extends Controller
             $test->text = $request->test['text'];
             $test->id = $request->test['id'];
             $test->tweet_id = $request->test['tweet_id'];
+            $test->user_id = Auth::id();
             $test->save();
         });
 
@@ -62,21 +64,15 @@ class TestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Test $test)
     {
-        // DB::transaction(function () use ($request, $test) {
-        //     $test = new Test;
-        //     $test->id = $request->test['id'];
-        //     $test->text = $request->test['text'];
-        //     $test->save();
-        //     $test->tweet_id = $request->test['tweet_id'];
-        //     $test->save();
-        // });
-        $test = Test::find($request->id);
-        $test->text = $request->text;
-        $test->tweet_id = $request->tweet_id;
-        $test->save();
-        return redirect('/');
+        DB::transaction(function () use ($request, $test) {
+            $test->text = $request->test['text'];
+            $test->save();
+        });
+        return response()->json([
+            'result' => true,
+        ]);
     }
 
     /**

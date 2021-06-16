@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use Illuminate\Support\Facades\Auth;
 class TweetForList extends JsonResource
 {
     /**
@@ -17,6 +17,11 @@ class TweetForList extends JsonResource
         return [
             'id' => $this->id,
             'text' => $this->text,
+            'user_id' => $this->user_id,
+            'user_name' =>$this->user->name,
+            'own_like'=>$this->like->where('user_id', Auth::user()->id)->count(),
+            'count'=>$this->like->count(),
+            'comment_visusal'=>false,
         ];
     }
 }

@@ -55,10 +55,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('employee/full_name', 'API\EmployeeController@fullname');
 
     // csv取込
-    //Likes
-    Route::get('/like', 'LikeController@index');//ブラウザでアクセスする。
-    Route::get('/ajax/like/user_list', 'LikeController@user_list');//ユーザー情報を取得
-    Route::post('/ajax/like', 'LikeController@like');//いいねデータを追加
     //Testのルーティング設定
     Route::get('test', 'API\TestController@index');
     Route::post('test', 'API\TestController@store');
@@ -73,4 +69,10 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('tweet/{tweet}', 'API\TweetController@update');
     Route::delete('tweet/{tweet}', 'API\TweetController@destroy');
     Route::get('tweet/selector', 'API\TweetController@selector');
+    //いいね機能の追加削除
+    Route::get('tweet/addgood/{tweet}', 'API\TweetController@addgood');
+    Route::delete('tweet/deletegood/{tweet}', 'API\TweetController@deletegood');
+    //いいねのルーティング設定設定
+    Route::get('like/userid', 'API\LikeController@userid');
+    Route::get('like/username', 'API\LikeController@username');
 });

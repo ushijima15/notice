@@ -17,6 +17,8 @@ class TweetForShow extends JsonResource
         return [
             'id' => $this->id,
             'text' => $this->text,
+            'user_id' => $this->user_id,
+            'user_name' =>$this->user->name,
         ];
     }
 }

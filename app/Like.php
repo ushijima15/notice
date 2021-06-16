@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
-    protected $fillable = ['test_id'];
-    public function test()
+    protected $fillable = ['tweet_id','user_id'];
+    public function tweet()
     {
-    return $this->belongsTo(Test::class);
+        return $this->belongsTo('App\Tweet');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

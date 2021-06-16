@@ -18,6 +18,8 @@ class TestForList extends JsonResource
             'id' => $this->id,
             'text' => $this->text,
             'tweet_id' => $this->tweet_id,
+            'user_id' => $this->user_id,
+            'user_name' => $this->user->name,
         ];
     }
 }
