@@ -17,6 +17,7 @@ class CreateLikesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tweet_id')->unsigned();
             $table->unsignedBigInteger('user_id')->unsigned();
+            $table->unsignedBigInteger('reaction_no')->unsigned();
             $table->timestamps();
         });
     }

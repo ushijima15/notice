@@ -70,8 +70,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::delete('tweet/{tweet}', 'API\TweetController@destroy');
     Route::get('tweet/selector', 'API\TweetController@selector');
     //いいね機能の追加削除
-    Route::get('tweet/addgood/{tweet}', 'API\TweetController@addgood');
-    Route::delete('tweet/deletegood/{tweet}', 'API\TweetController@deletegood');
+    Route::get('tweet/addgood/{tweet}/{mark}', 'API\TweetController@addgood');
+    Route::delete('tweet/deletegood/{tweet}/{mark}', 'API\TweetController@deletegood');
     //いいねのルーティング設定設定
     Route::get('like/userid', 'API\LikeController@userid');
     Route::get('like/username', 'API\LikeController@username');

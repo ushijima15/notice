@@ -11570,7 +11570,7 @@ a.text-orange:focus {
 }
 
 .good {
-  color: red;
+  color: #F05654;
   display: inline-block;
 }
 
@@ -11596,5 +11596,24 @@ a.text-orange:focus {
 .reply3 {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.VueStar {
+  position: relative;
+}
+
+.VueStar__icon .fa {
+  font-size: 3em;
+  cursor: pointer;
+}
+
+a,
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+[v-cloak] {
+  display: none;
 }
 

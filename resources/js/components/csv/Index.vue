@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="d-flex align-items-center mt-4">
-            <div class="col-4 text-right ">受注データ</div>
+            <div class="col-4 text-right">受注データ</div>
             <div class="col-5">
               <csv-importer :file_name.sync="file_name" :is_header="checked" @file-change="orders = $event" />
             </div>

@@ -31,8 +31,8 @@ import ModalDialog from 'vue-mg-modal-dialog'
 // Vue.component("DateTimeSelector", DateTimeSelector);
 import CsvImporter from 'vue-mg-csv-importer'
 import VueInputCalculator from 'vue-input-calculator'
+import VueStar from 'vue-star'
 require('./bootstrap')
-
 window.Vue = require('vue')
 Vue.use(VueRouter)
 Vue.use(Vuex)
@@ -52,7 +52,7 @@ Vue.component('ToggleSelector', ToggleSelector)
 Vue.component('ModalDialog', ModalDialog)
 Vue.component('CsvImporter', CsvImporter)
 Vue.component('VueInputCalculator', VueInputCalculator)
-
+// vue starの設定
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -68,7 +68,7 @@ Vue.component('BackButton', require('./components/commons/buttons/BackButton.vue
 Vue.component('Pagination', require('./components/commons/Pagination.vue').default)
 Vue.component('SelectName', require('./components/commons/SelectName.vue').default)
 Vue.component('SearchComponent', require('./components/commons/ModalSearchComponent.vue').default)
-
+Vue.component('VueStar', VueStar)
 const router = new VueRouter({
   mode: 'history',
   routes: [

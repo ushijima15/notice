@@ -1,6 +1,6 @@
 /* eslint-disable */
 <template>
-  <div class="container">
+  <div v-cloak class="container">
     <div>
       <button type="button" class="btn btn-primary" @click="onBack">戻る</button>
       ログインユーザー:{{ username }}
@@ -12,14 +12,20 @@
         v-for="tweet in tweets"
         :key="tweet.id"
         class="clickable"
-        style="padding: 10px; margin-bottom: 10px; border: 5px double #333333; border-radius: 10px; background-color: #ffff99;"
+        style="
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 5px double #333333;
+          border-radius: 10px;
+          background-color: #ffff99;
+        "
       >
         <p>投稿者:{{ tweet.user_name }}</p>
         <p>本文</p>
         <p>{{ tweet.text }}</p>
         <div>
           <nobr>
-            <button
+            <!--<button
               v-if="tweet.own_like === 0"
               type="button"
               class="btn btn-success text-center align-middle"
@@ -34,8 +40,52 @@
               @click="onDeletegood(tweet.id)"
             >
               いいね済み
-            </button>
-            いいね数:{{ tweet.count }}
+            </button>-->
+            <a
+              v-if="tweet.own_like_good === 0"
+              slot="icon"
+              class="fas fa-thumbs-up fa-lg"
+              style="color: #c0c0c0"
+              @click="onAddgood(tweet.id, 1)"
+            ></a>
+            <a
+              v-else
+              slot="icon"
+              class="fas fa-thumbs-up fa-lg"
+              style="color: #00bfff"
+              @click="onDeletegood(tweet.id, 1)"
+            ></a>
+            {{ tweet.count_good }}
+            <a
+              v-if="tweet.own_like_heart === 0"
+              slot="icon"
+              class="far fa-heart fa-lg"
+              style="color: #ff00ff"
+              @click="onAddgood(tweet.id, 2)"
+            ></a>
+            <a
+              v-else
+              slot="icon"
+              class="fas fa-heart fa-lg"
+              style="color: #ff00ff"
+              @click="onDeletegood(tweet.id, 2)"
+            ></a>
+            {{ tweet.count_heart }}
+            <a
+              v-if="tweet.own_like_check === 0"
+              slot="icon"
+              class="far fa-check-square fa-lg"
+              style="color: #c0c0c0"
+              @click="onAddgood(tweet.id, 3)"
+            ></a>
+            <a
+              v-else
+              slot="icon"
+              class="fas fa-check-square fa-lg"
+              style="color: #00ff00"
+              @click="onDeletegood(tweet.id, 3)"
+            ></a>
+            {{ tweet.count_check }}
             <button type="button" class="btn btn-primary text-center align-middle" @click="onNext(tweet.id)">
               返信する
             </button>
@@ -95,11 +145,14 @@ export default {
       userid: null,
       username: '',
       message: null,
+      isActive: false,
     }
   },
   computed: {},
   watch: {
-    //
+    getItems: function() {
+      return this.getItems
+    },
   },
   mounted() {
     // this.inspected_on = new moment().format('YYYY-MM-DD')
@@ -137,6 +190,10 @@ export default {
         }),
       )
     },
+    toggle_switch: function() {
+      alert(this.isActive)
+      this.isActive = !this.isActive
+    },
     onNext: function(tweet_id) {
       this.message = this.$router.push({ name: 'test.create', params: { tweetId: tweet_id } })
     },
@@ -165,11 +222,11 @@ export default {
           //
         })
     },
-    onDeletegood: function(tweet_id) {
+    onDeletegood: function(tweet_id, mark) {
       this.message = tweet_id
       const _this = this
       axios
-        .delete('/api/tweet/deletegood/' + this.message)
+        .delete('/api/tweet/deletegood/' + this.message + '/' + mark)
         .then(function(resp) {})
         .catch(function(resp) {
           console.log(resp)
@@ -177,20 +234,42 @@ export default {
         .finally(function() {
           //
         })
-      location.reload()
+      if (mark === 1) {
+        this.tweets[this.message - 1].own_like_good = 0
+        this.tweets[this.message - 1].count_good -= 1
+      }
+      if (mark === 2) {
+        this.tweets[this.message - 1].own_like_heart = 0
+        this.tweets[this.message - 1].count_heart -= 1
+      }
+      if (mark === 3) {
+        this.tweets[this.message - 1].own_like_check = 0
+        this.tweets[this.message - 1].count_check -= 1
+      }
     },
-    onAddgood: function(tweet_id) {
+    onAddgood: function(tweet_id, mark) {
       this.message = tweet_id
       this.invalid = false
       this.errorMessage = ''
       const _this = this
       axios
-        .get('/api/tweet/addgood/' + this.message)
+        .get('/api/tweet/addgood/' + this.message + '/' + mark)
         .then(function(resp) {})
         .catch(function(resp) {
           console.log(resp)
         })
-      location.reload()
+      if (mark === 1) {
+        this.tweets[this.message - 1].own_like_good = 1
+        this.tweets[this.message - 1].count_good += 1
+      }
+      if (mark === 2) {
+        this.tweets[this.message - 1].own_like_heart = 1
+        this.tweets[this.message - 1].count_heart += 1
+      }
+      if (mark === 3) {
+        this.tweets[this.message - 1].own_like_check = 1
+        this.tweets[this.message - 1].count_check += 1
+      }
     },
     visual: function(visable, number) {
       visable = !visable
@@ -202,4 +281,7 @@ export default {
 
 <style lang="scss" scoped>
 @import 'resources/sass/variables';
+[v-cloak] {
+  display: none;
+}
 </style>

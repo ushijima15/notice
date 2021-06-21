@@ -8,7 +8,13 @@
     </div>
     <br />
     <div
-      style="padding: 10px; margin-bottom: 10px; border: 5px double #333333; border-radius: 10px; background-color: #ffff99;"
+      style="
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 5px double #333333;
+        border-radius: 10px;
+        background-color: #ffff99;
+      "
     >
       <p>投稿者:{{ tweet.user_name }}</p>
       <p>【投稿内容】</p>

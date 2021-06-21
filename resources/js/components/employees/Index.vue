@@ -42,12 +42,12 @@
       </div>
     </div>
     <div>
-      <p>いいねボタン実装</p>
+      <!--<p>いいねボタン実装</p>
       <button v-if="isActive === false" class="good" @click="toggle_switch()">&#9825;</button>
       <button v-if="isActive === true" class="good" @click="toggle_switch()">&#9829;</button>
       <button v-if="isActive2 === true" class="good2" @click="toggle_switch2()">&#x1f44d;</button>
       <button v-if="isActive2 === false" @click="toggle_switch2()">&#x1f44d;</button>
-      <!--<button v-if="status === false" type="button" class="btn btn-outline-warning" @click.prevent="like_check">
+      <button v-if="status === false" type="button" class="btn btn-outline-warning" @click.prevent="like_check">
         &#9825;
       </button>
       <a v-if="status == false" href="#">{{ count }}</a>
@@ -57,6 +57,26 @@
       <a v-if="status === true" href="#">
         {{ count }}
       </a>-->
+
+      <a
+        v-if="isActive === true"
+        slot="icon"
+        class="fas fa-check-square"
+        style="color: #00ff00"
+        @click="toggle_switch()"
+      ></a>
+      <a v-else slot="icon" class="far fa-check-square" style="color: #c0c0c0" @click="toggle_switch()"></a>
+      <!--
+      <a slot="icon" class="fa fa-heart" color="#000000" @click="toggle_switch()"></a>
+      <div>
+        <vue-star animate="animated rubberBand">
+          <a slot="icon" class="fa fa-heart" color="#F05654" @click="handleClick"></a>
+        </vue-star>
+        <vue-star animate="animated rubberBand" color="#000000">
+          <a slot="icon" class="fa fa-heart" @click="handleClick"></a>
+        </vue-star>
+      </div>
+      -->
     </div>
   </div>
 </template>
@@ -83,15 +103,14 @@ export default {
   watch: {
     //
   },
-  created() {
-    this.first_check()
-  },
+  created() {},
   mounted() {
     // this.inspected_on = new moment().format('YYYY-MM-DD')
     this.getItems()
   },
   methods: {
     toggle_switch: function() {
+      alert(this.isActive)
       this.isActive = !this.isActive
     },
     toggle_switch2: function() {
@@ -117,10 +136,10 @@ export default {
     onBack: function() {
       this.$router.go(-1)
     },
+    handleClick: function() {},
   },
 }
 </script>
-
 <style lang="scss" scoped>
 @import 'resources/sass/variables';
 </style>

@@ -30,9 +30,9 @@
             <div class="">
               <select v-model="selected_line_no" class="form-control">
                 <option value=""></option>
-                <option v-for="(line_number, index) in line_numbers" :key="index" :value="line_number">{{
-                  line_number
-                }}</option>
+                <option v-for="(line_number, index) in line_numbers" :key="index" :value="line_number">
+                  {{ line_number }}
+                </option>
               </select>
             </div>
           </div>
@@ -65,9 +65,7 @@
             @click="onResume(product_cost)"
           >
             <td data-label="" class="text-sm-center">
-              <button v-if="product_cost.is_add" class="btn btn-success text-white">
-                追加
-              </button>
+              <button v-if="product_cost.is_add" class="btn btn-success text-white">追加</button>
             </td>
             <!-- todo -->
             <td data-label="作成日" class="text-sm-center">{{ product_cost.worked_on }}</td>

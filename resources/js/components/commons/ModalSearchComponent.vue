@@ -1,5 +1,5 @@
 <template>
-  <div style=";">
+  <div style=" ;">
     <!-- <div class="d-flex"> -->
     <div v-if="label" class="align-self-center mr-3">
       {{ label }}

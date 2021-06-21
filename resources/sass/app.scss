@@ -109,8 +109,8 @@ border-radius: 0 0 .35rem 0;
   opacity: 0;
 }
 .good{
-  color:red;
-  display: inline-block
+  color:#F05654;
+  display: inline-block;
 }
 .good2{
   background-color:rgb(255, 174, 0);
@@ -131,4 +131,15 @@ border-radius: 0 0 .35rem 0;
 .reply3{
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.VueStar {
+  position: relative;
+}
+.VueStar__icon .fa {
+  font-size: 3em;
+  cursor: pointer;
+}
+a, a:focus{ outline: none;text-decoration: none;}
+[v-cloak] {
+  display: none;
 }
