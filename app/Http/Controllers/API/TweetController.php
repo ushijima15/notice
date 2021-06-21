@@ -92,27 +92,22 @@ class TweetController extends Controller
             'result' => true,
         ]);
     }
-    public function addgood(Request $request,$id)
-    {
-        Like::create([
-            'tweet_id' => $id,
-            'user_id' => Auth::id(),
-        ]);
-        // DB::transaction(function () use ($request) {
-        //     $like = new Like;
-        //     $like->tweet_id = $request->tweet['id'];
-        //     $like->user_id = $request->Auth::id();
-        //     $like->save();
-        // });
+    public function addgood(Request $request,$id,$mark)
+    {      
+        $like= new Like;
+        $like->tweet_id = $id;
+        $like->user_id = Auth::id();
+        $like->reaction_no = $mark;
+        $like->save();
         //session()->flash('success', 'You Liked the Reply.');
         //return redirect()->back();
         return response()->json([
             'result' => true,
         ]);
     }
-    public function deletegood(Request $request,$id)
+    public function deletegood(Request $request,$id,$mark)
     {
-       $like = Like::where('tweet_id', $id)->where('user_id', Auth::id())->first();
+       $like = Like::where('tweet_id', $id)->where('user_id', Auth::id())->where('reaction_no',$mark)->first();
        $like->delete();
    
        //session()->flash('success', 'You Unliked the Reply.');
