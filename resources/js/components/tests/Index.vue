@@ -4,7 +4,6 @@
     <div>
       <button type="button" class="btn btn-primary" @click="onBack">戻る</button>
       ログインユーザー:{{ username }}
-      <span data-popup="Like" class="like reaction"></span>
       <hr />
     </div>
     <div>
@@ -25,22 +24,6 @@
         <p>{{ tweet.text }}</p>
         <div>
           <nobr>
-            <!--<button
-              v-if="tweet.own_like === 0"
-              type="button"
-              class="btn btn-success text-center align-middle"
-              @click="onAddgood(tweet.id)"
-            >
-              いいね!
-            </button>
-            <button
-              v-else
-              type="button"
-              class="btn btn-secondary text-center align-middle"
-              @click="onDeletegood(tweet.id)"
-            >
-              いいね済み
-            </button>-->
             <a
               v-if="tweet.own_like_good === 0"
               slot="icon"
@@ -116,7 +99,7 @@
                 v-if="test.user_id === userid"
                 type="button"
                 class="btn btn-primary text-center align-middle"
-                @click="onDelete(test.id)"
+                @click="onDelete(test.id, tweet.id)"
               >
                 削除
               </button>
@@ -139,6 +122,7 @@ export default {
     return {
       tests: [],
       tweets: [],
+      notices: [],
       isLoading: false,
       count: '',
       result: false,
@@ -146,6 +130,8 @@ export default {
       username: '',
       message: null,
       isActive: false,
+      push: '',
+      push_count: 0,
     }
   },
   computed: {},
@@ -189,6 +175,29 @@ export default {
           this.isLoading = false
         }),
       )
+      const api6 = axios.create()
+      axios.all([api6.get('/api/notice')]).then(
+        axios.spread((res1, res2, res3, res4) => {
+          this.notices = res1.data
+          for (let i = 0; i < this.notices.length; i++) {
+            if (
+              this.notices[i].tweet_userid === this.userid &&
+              this.notices[i].tweet_userid !== this.notices[i].comment_userid
+            ) {
+              this.push +=
+                this.notices[i].tweet_id +
+                'のツイートに対して' +
+                this.notices[i].comment_username +
+                'から返信が来ました。\n'
+            }
+          }
+          if (this.push !== '') {
+            alert(this.push)
+            axios.delete('/api/notice/' + this.userid)
+          }
+          this.isLoading = false
+        }),
+      )
     },
     toggle_switch: function() {
       alert(this.isActive)
@@ -203,13 +212,13 @@ export default {
     onBack() {
       this.$router.go(-1)
     },
-    onDelete: function(test_id) {
+    onDelete: function(test_id, tweet_id) {
       this.message = test_id
       if (!confirm('削除してもよろしいですか？')) {
         return
       }
-      location.reload()
       const _this = this
+      axios.delete('/api/notice/' + this.userid + '/' + tweet_id)
       axios
         .delete('/api/test/' + this.message)
         .then(function(resp) {
@@ -221,6 +230,7 @@ export default {
         .finally(function() {
           //
         })
+      location.reload()
     },
     onDeletegood: function(tweet_id, mark) {
       this.message = tweet_id

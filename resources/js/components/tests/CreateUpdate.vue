@@ -17,6 +17,7 @@
       "
     >
       <p>投稿者:{{ tweet.user_name }}</p>
+      <p>投稿者:{{ tweet.user_id }}</p>
       <p>【投稿内容】</p>
       <p>{{ tweet.text }}</p>
     </div>
@@ -24,7 +25,7 @@
       <input v-model="test.text" class="reply2" type="text" />
       <div class="reply3">
         <button type="button" class="btn btn-primary" @click="onBack">送信の取り消し</button>
-        <button type="button" class="btn btn-primary" @click="onStore">送信する</button>
+        <button type="button" class="btn btn-primary" @click="onStore(tweet.user_id)">送信する</button>
       </div>
     </div>
   </div>
@@ -57,6 +58,7 @@ export default {
       isLoading: false,
       fullPage: false,
       visual: false,
+      userid: null,
     }
   },
   computed: {
@@ -84,6 +86,13 @@ export default {
           this.isLoading = false
         }),
       )
+      const api3 = axios.create()
+      axios.all([api3.get('/api/like/userid')]).then(
+        axios.spread((res1, res2, res3, res4) => {
+          this.userid = res1.data
+          this.isLoading = false
+        }),
+      )
       if (this.mode === 'create') {
         this.isLoading = false
       } else {
@@ -95,7 +104,7 @@ export default {
         )
       }
     },
-    onStore: function() {
+    onStore: function(tweet_userId) {
       this.test.tweet_id = this.tweetId
       this.invalid = false
       this.errorMessage = ''
@@ -105,6 +114,7 @@ export default {
           alert('文字が入力されていません。')
           return
         }
+        axios.post('/api/notice/' + this.tweetId + '/' + tweet_userId)
         axios
           .post('/api/test', {
             test: this.test,

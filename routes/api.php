@@ -75,4 +75,9 @@ Route::middleware(['auth:api'])->group(function () {
     //いいねのルーティング設定設定
     Route::get('like/userid', 'API\LikeController@userid');
     Route::get('like/username', 'API\LikeController@username');
+    //通知の自動追加・自動削除
+    Route::get('notice', 'API\NoticeController@index');
+    Route::post('notice/{tweetid}/{tweetuserid}', 'API\NoticeController@store');
+    Route::delete('notice/{userid}', 'API\NoticeController@destroy');
+    Route::delete('notice/{userid}/{tweetid}', 'API\NoticeController@destroycomment');
 });

@@ -18,6 +18,10 @@ class Tweet extends Model
     {
         return $this->hasMany('App\Like');
     }
+    public function notice()
+    {
+        return $this->hasMany('App\Notice');
+    }
     // public function is_liked_by_auth_user()
     // {
     //   $id = Auth::id();
