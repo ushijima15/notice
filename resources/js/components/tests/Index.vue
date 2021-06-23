@@ -132,6 +132,7 @@ export default {
       isActive: false,
       push: '',
       push_count: 0,
+      check: 0,
     }
   },
   computed: {},
@@ -184,11 +185,22 @@ export default {
               this.notices[i].tweet_userid === this.userid &&
               this.notices[i].tweet_userid !== this.notices[i].comment_userid
             ) {
-              this.push +=
-                this.notices[i].tweet_id +
-                'のツイートに対して' +
-                this.notices[i].comment_username +
-                'から返信が来ました。\n'
+              for (let j = 0; j < i; j++) {
+                if (
+                  this.notices[i].tweet_id === this.notices[j].tweet_id &&
+                  this.notices[i].comment_username === this.notices[j].comment_username
+                ) {
+                  this.check = 1
+                }
+              }
+              if (this.check === 0) {
+                this.push +=
+                  this.notices[i].tweet_id +
+                  'のツイートに対して' +
+                  this.notices[i].comment_username +
+                  'から返信が来ました。\n'
+              }
+              this.check = 0
             }
           }
           if (this.push !== '') {
